@@ -1,0 +1,17 @@
+$ git add .
+$ git commit -m "new commit 1"
+$ git push -u origin master
+
+
+
+Cài 1 số thư viện 
+
+npm install --save-exact react-router-dom@6.3.0
+
+npm install --save-exact react-bootstrap@2.4.0
+
+npm install --save-exact sass@1.53.0
+
+npm install bootstrap
+
+import 'bootstrap/dist/css/bootstrap.min.css';
