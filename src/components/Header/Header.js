@@ -19,7 +19,9 @@ const Header = () => {
                         <Nav.Link to="/admins">Admin</Nav.Link> */}
                     </Nav>
                     <Nav>
-                        <NavDropdown title="Settings" id="basic-nav-dropdown">
+                        <button className="btn-login">Login</button>
+                        <button className="btn-signup">Sign Up</button>
+                        {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
                             <NavDropdown.Item >Action</NavDropdown.Item>
                             <NavDropdown.Item >
                                 Another action
@@ -29,7 +31,7 @@ const Header = () => {
                             <NavDropdown.Item >Log Out</NavDropdown.Item>
                             <NavDropdown.Item >Profile</NavDropdown.Item>
 
-                        </NavDropdown>
+                        </NavDropdown> */}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
