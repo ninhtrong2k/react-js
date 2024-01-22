@@ -11,6 +11,8 @@ import {
 
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../assets/bg2.jpg';
+import { FaReact } from "react-icons/fa";
+
 
 
 const SideBar = (props) => {
@@ -37,6 +39,7 @@ const SideBar = (props) => {
                             whiteSpace: 'nowrap',
                         }}
                     >
+                        <FaReact fontSize={'3rem'} color={'blue'} />
                         Hoi Dan IT
                     </div>
                 </SidebarHeader>
@@ -45,20 +48,21 @@ const SideBar = (props) => {
                     <Menu iconShape="circle">
                         <MenuItem
                             icon={<FaTachometerAlt />}
-                            suffix={<span className="badge red">New</span>}
+                            // suffix={<span className="badge red">New</span>}
                         >
-                            dashboard
+                            Dashboard
                         </MenuItem>
-                        <MenuItem icon={<FaGem />}> components </MenuItem>
+                        <MenuItem icon={<FaGem />}> Components </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
                         <SubMenu
-                            suffix={<span className="badge yellow">3</span>}
+                            // suffix={<span className="badge yellow">3</span>}
                             icon={<FaRegLaughWink />}
+                            title="Feature"
                         >
-                            <MenuItem> 1</MenuItem>
-                            <MenuItem> 2</MenuItem>
-                            <MenuItem> 3</MenuItem>
+                            <MenuItem> Quản lý User</MenuItem>
+                            <MenuItem> Quản lý Bài Quiz</MenuItem>
+                            <MenuItem> Quản lý Câu Hỏi</MenuItem>
                         </SubMenu>
 
                     </Menu>
