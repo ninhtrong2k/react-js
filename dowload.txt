@@ -23,3 +23,7 @@ npm install --save-exact react-pro-sidebar@0.7.1
 TẢi icon 
 
 npm install --save-exact react-icons@4.4.0
+
+
+npm install --save-exact axios@0.27.2 react-toastify@9.0.7  react-paginate@8.1.3
+
