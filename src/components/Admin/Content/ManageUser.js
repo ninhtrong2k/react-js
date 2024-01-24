@@ -1,4 +1,6 @@
-import ModalCreateUser from "./ModalCreateUser"
+import ModalCreateUser from "./ModalCreateUser";
+// import { FaCirclePlus } from "./react-icons/fa6";
+
 const ManageUser = (props) => {
     return (
         <div className="manage-user-container">
@@ -13,8 +15,8 @@ const ManageUser = (props) => {
                 </div>
                 <div>
                     Table User
-                    <ModalCreateUser />
                 </div>
+                    <ModalCreateUser />
             </div>
         </div>
     )
