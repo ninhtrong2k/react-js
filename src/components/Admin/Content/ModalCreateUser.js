@@ -67,10 +67,11 @@ const ModalCreateUser = (props) => {
         }
             // const FormData = require('form-data');
         let data = await postCreateNewUser(email, password,username,role,image);
-        console.log("comboden",data)
+        // console.log("comboden",data)
         if(data && data.EC === 0){
             toast.success(data.EM)
             handleClose();
+            await props.fetchListUsers();
         };
         if(data && data.EC !== 0){
             toast.error(data.EM)

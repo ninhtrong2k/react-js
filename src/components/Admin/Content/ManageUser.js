@@ -1,9 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalCreateUser from "./ModalCreateUser";
 import { FcPlus } from "react-icons/fc";
+import TableUsers from "./TabUsers";
+import { getAllUsers } from "../../../services/apiServices";
 
 const ManageUser = (props) => {
+
     const [showModalCreateUser, setshowModalCreateUser] = useState(false); 
+
+    const [listUsers, setListUser] = useState(
+        []
+    )
+
+    useEffect(() => {
+        fetchListUsers();
+    }, []);
+    const fetchListUsers = async () => {
+        let res = await getAllUsers();
+        console.log(res);
+        if (res.EC === 0) {
+            setListUser(res.DT);
+        }
+    }
+
+
     return (
         <div className="manage-user-container">
             <div className="title">
@@ -16,11 +36,12 @@ const ManageUser = (props) => {
                     </button>
                 </div>
                 <div className="table-users-container">
-                    Table User
+                    <TableUsers listUsers={listUsers}/>
                 </div>
                     <ModalCreateUser 
                     show={showModalCreateUser}
                     setShow={setshowModalCreateUser}
+                    fetchListUsers={fetchListUsers}
                     />
             </div>
         </div>
