@@ -5,7 +5,7 @@ import './ManageUser.scss';
 import { FcPlus } from "react-icons/fc";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { postCreateNewUser } from '../../../services/apiServices';
+import { putUpdateUser } from '../../../services/apiServices';
 import _ from 'lodash';
 
 
@@ -24,6 +24,7 @@ const ModalUpdateUser
             setRole("ADMIN");
             setImage("");
             setPreviewImage("");
+            props.restUpdateData();
         };
         const handleShow = () => setShow(true);
 
@@ -35,7 +36,7 @@ const ModalUpdateUser
         const [previewImage, setPreviewImage] = useState("");
 
         useEffect(() => {
-            console.log("effct", );
+            console.log("effct",dataUpdate );
             if(!_.isEmpty(dataUpdate)){
                 setEmail(dataUpdate.email);
                 setUserName(dataUpdate.username);
@@ -81,10 +82,10 @@ const ModalUpdateUser
 
             }
             // const FormData = require('form-data');
-            let data = await postCreateNewUser(email, password, username, role, image);
+            let data = await putUpdateUser(dataUpdate.id, username, role, image);
             // console.log("comboden",data)
             if (data && data.EC === 0) {
-                toast.success(data.EM)
+                toast.success(data.EM);
                 handleClose();
                 await props.fetchListUsers();
             };
