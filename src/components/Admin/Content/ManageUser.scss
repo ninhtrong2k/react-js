@@ -1,20 +1,34 @@
 .manage-user-container {
+    padding: 10px;
+    .user-content {
+        .btn-add-new {
+            margin: 15px 0;
+        }
+    }
+
+    .title {
+        font-weight: 600;
+        font-size: 20px;
+    }
 }
+
 .modal-add-user {
-    .img-preview{
+    .img-preview {
         display: flex;
         justify-content: center;
         align-items: center;
         color: #ccc;
         border: 1px solid red;
         height: 150px;
-        border-style:dashed ;
+        border-style: dashed;
         border-radius: 5px;
+
         img {
             max-width: 100%;
             height: 100%;
         }
     }
+
     .label-upload {
         display: flex;
         align-items: center;
@@ -24,9 +38,10 @@
         border-radius: 5px;
         background: #eee;
         cursor: pointer;
+
         &:hover {
             background: #dcdcdc;
         }
     }
-    
+
 }
