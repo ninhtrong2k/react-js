@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useState } from "react";
 const TableUsers = (props) => {
     // const [listUsers, setListUser] = useState(
     //     []
@@ -29,7 +27,7 @@ const TableUsers = (props) => {
                                     <td>{item.email}</td>
                                     <td>{item.role}</td>
                                     <td>
-                                        <button className="btn btn-secondary">View</button>
+                                        <button className="btn btn-secondary" onClick={() => props.handleShowViewUser(item)}>View</button>
                                         <button className="btn btn-warning mx-3 " onClick={() => props.handleClickBtnUpdate(item)}>Update</button>
                                         <button className="btn btn-danger">Delete</button>
 
