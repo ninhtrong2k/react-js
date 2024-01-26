@@ -49,9 +49,11 @@ const ModalUpdateUser
         },[dataUpdate]);
 
         const handleUpLoadImage = (event) => {
+            // console.log('img',event.target.files[0])
             if (event.target && event.target.files && event.target.files[0]) {
                 setPreviewImage(URL.createObjectURL(event.target.files[0]));
-                setImage(event.target.files[0]);
+                setImage(URL.createObjectURL(event.target.files[0]));
+                console.log('img ',event.target.files[0])
             } else {
                 setPreviewImage("");
             }
@@ -82,6 +84,7 @@ const ModalUpdateUser
 
             }
             // const FormData = require('form-data');
+            console.log('check awit',dataUpdate);
             let data = await putUpdateUser(dataUpdate.id, username, role, image);
             // console.log("comboden",data)
             if (data && data.EC === 0) {

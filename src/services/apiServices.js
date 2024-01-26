@@ -5,7 +5,7 @@ const postCreateNewUser = (email, password,username,role,image) => {
     data.append('password', password);
     data.append('username', username);
     data.append('role', role);
-    data.append('userImagem', image);
+    data.append('image', image);
     return axios.post('api/v1/participant', data);
 }
 
@@ -18,7 +18,7 @@ const putUpdateUser = (id,username,role,image) => {
     data.append('id', id);
     data.append('username', username);
     data.append('role', role);
-    data.append('userImagem', image);
+    data.append('image', image);
     return axios.put('api/v1/participant', data);
 }
 export {postCreateNewUser , getAllUsers, putUpdateUser}

@@ -5,6 +5,7 @@ import TableUsers from "./TabUsers";
 import { getAllUsers } from "../../../services/apiServices";
 import ModalUpdateUser from "./ModalUpdateUser";
 import ModalShowViewUser from "./ModalShowViewUser";
+import ModalDeleteUser from "./ModalDeleteUser";
 
 const ManageUser = (props) => {
 
@@ -14,7 +15,8 @@ const ManageUser = (props) => {
     const [dataUpdate, setDataUpdate] = useState(props);
     const [dataGetUser, setdataGetUser] = useState(props);
 
-
+    const [showModalDeleteUser, setShowModalDeleteUser] = useState(false)
+    const [dataDelete, setDataDelete] = useState(props);
 
     const [listUsers, setListUser] = useState(
         []
@@ -52,6 +54,12 @@ const ManageUser = (props) => {
 
     }
 
+    const handleClickBtnDelete = (user) => {
+        setShowModalDeleteUser(true);
+        // console.log(user)
+        setDataDelete(user);
+    }
+
 
     return (
         <div className="manage-user-container">
@@ -69,6 +77,7 @@ const ManageUser = (props) => {
                         listUsers={listUsers}
                         handleClickBtnUpdate={handleClickBtnUpdate}
                         handleShowViewUser={handleShowViewUser}
+                        handleClickBtnDelete={handleClickBtnDelete}
                     />
                 </div>
                 <ModalCreateUser
@@ -89,6 +98,11 @@ const ManageUser = (props) => {
                     setShow={setShowViewUser}
                     dataGetUser={dataGetUser}
                     restShowViewData={restShowViewData}
+                />
+                <ModalDeleteUser
+                    show={showModalDeleteUser}
+                    setShow={setShowModalDeleteUser}
+                    dataDelete={dataDelete}
                 />
             </div>
         </div>
