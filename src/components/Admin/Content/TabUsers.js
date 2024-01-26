@@ -4,7 +4,6 @@ const TableUsers = (props) => {
     // )
     const {listUsers} = props;
 
-    console.log("render view");
     return (
         <>
             <table className="table table-hover  table-bordered">

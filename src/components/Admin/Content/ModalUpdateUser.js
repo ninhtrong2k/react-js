@@ -97,8 +97,6 @@ const ModalUpdateUser
             }
 
         }
-
-        console.log("check data", dataUpdate);
         return (
             <>
                 {/* <Button variant="primary" onClick={handleShow}>
