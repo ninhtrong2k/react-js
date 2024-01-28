@@ -13,7 +13,7 @@ import _ from 'lodash';
 
 const ModalUpdateUser
     = (props) => {
-        const { show, setShow, dataUpdate } = props;
+        const { show, setShow, dataUpdate , currenPage } = props;
         // const [show, setShow] = useState(false);
 
         const handleClose = () => {
@@ -36,24 +36,24 @@ const ModalUpdateUser
         const [previewImage, setPreviewImage] = useState("");
 
         useEffect(() => {
-            console.log("effct",dataUpdate );
-            if(!_.isEmpty(dataUpdate)){
+            console.log("effct", dataUpdate);
+            if (!_.isEmpty(dataUpdate)) {
                 setEmail(dataUpdate.email);
                 setUserName(dataUpdate.username);
                 setRole(dataUpdate.role);
                 setImage("");
-                if(dataUpdate.image){
+                if (dataUpdate.image) {
                     setPreviewImage(`data:image/jpeg;base64,${dataUpdate.image}`);
                 }
             }
-        },[dataUpdate]);
+        }, [dataUpdate]);
 
         const handleUpLoadImage = (event) => {
             // console.log('img',event.target.files[0])
             if (event.target && event.target.files && event.target.files[0]) {
                 setPreviewImage(URL.createObjectURL(event.target.files[0]));
                 setImage(URL.createObjectURL(event.target.files[0]));
-                console.log('img ',event.target.files[0])
+                console.log('img ', event.target.files[0])
             } else {
                 setPreviewImage("");
             }
@@ -84,13 +84,14 @@ const ModalUpdateUser
 
             }
             // const FormData = require('form-data');
-            console.log('check awit',dataUpdate);
+            console.log('check awit', dataUpdate);
             let data = await putUpdateUser(dataUpdate.id, username, role, image);
             // console.log("comboden",data)
             if (data && data.EC === 0) {
                 toast.success(data.EM);
                 handleClose();
-                await props.fetchListUsers();
+                // props.setCurrenPage(1);
+                await props.fetchListUsersWithPaginate(props.currenPage);
             };
             if (data && data.EC !== 0) {
                 toast.error(data.EM)
