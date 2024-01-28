@@ -9,6 +9,15 @@ const postCreateNewUser = (email, password, username, role, image) => {
     return axios.post('api/v1/participant', data);
 }
 
+const postRegister = (email, password, username, role) => {
+    const data = new FormData();
+    data.append('email', email);
+    data.append('password', password);
+    data.append('username', username);
+    data.append('role', role);
+    return axios.post('api/v1/participant', data);
+}
+
 const getAllUsers = () => {
     return axios.get('api/v1/participant/all');
 }
@@ -33,6 +42,6 @@ const postLogin = (email ,password) => {
     return axios.post(`api/v1/login`,{email,password});
 }
 
-export { postCreateNewUser, getAllUsers, putUpdateUser, deleteUser, getUsersWithPaginate ,postLogin }
+export { postCreateNewUser, getAllUsers, putUpdateUser, deleteUser, getUsersWithPaginate ,postLogin ,postRegister }
 
 
