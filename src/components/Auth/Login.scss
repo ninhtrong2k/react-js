@@ -1,4 +1,18 @@
 .login-register-container {
+    .loaderIcon {
+        font-size: 14px;
+        margin-bottom: 3px;
+        color: red;
+        animation: spin 1s infinite linear;
+    }
+    @keyframes spin {
+        from {
+            transform: scale(1) rotate(0deg);
+        }
+        to {
+            transform: scale(1) rotate(360deg);
+        }
+    }
     .header {
         height: 45px;
         padding: 0 100px;
@@ -48,6 +62,10 @@
             margin: 20px 0;
             color: #fff;
             background: black;
+            &:disabled {
+                background: #ccc;
+                cursor: no-drop;
+            }
         }
         .back {
             cursor: pointer;

@@ -5,21 +5,25 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import './Login.scss';
 import { doLogin } from '../../redux/action/userAction';
+import { FaSpinner } from "react-icons/fa";
 const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const handleLogin = async() => {
-        // alert("me")
-        let data = await postLogin(email,password)
-        if(data && data.EC === 0){
+    const [isLoading, setIsLoading] = useState(false);
+    const handleLogin = async () => {
+        setIsLoading(true);
+        let data = await postLogin(email, password)
+        if (data && data.EC === 0) {
             dispatch(doLogin(data))
-            toast.success(data.EM)   
+            toast.success(data.EM)
+            setIsLoading(false);
             navigate('/');
-         };
-        if(data && data.EC !== 0){
+        };
+        if (data && data.EC !== 0) {
             toast.error(data.EM)
+            setIsLoading(false);
         }
     }
     return (
@@ -57,13 +61,17 @@ const Login = (props) => {
                 </div>
                 <span className='forgot-password'>Forgot password ?</span>
                 <div>
-                    <button 
-                    className='btn-submit'
-                    onClick={(event) => handleLogin()}
-                    >Login to HOIDANIT</button>
+                    <button
+                        className='btn-submit'
+                        onClick={(event) => handleLogin()}
+                        disabled={isLoading}
+                    >
+                            {isLoading === true && <FaSpinner className='loaderIcon' />}                        
+                                <span>Login to HOIDANIT</span>
+                    </button>
                 </div>
                 <div className='text-center'>
-                    <span className='back' onClick={() => {navigate('/')}} > Go to Homepage</span>
+                    <span className='back' onClick={() => { navigate('/') }} > Go to Homepage</span>
                 </div>
             </div>
         </div>
