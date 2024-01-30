@@ -13,15 +13,26 @@
         }
 
         .q-content {
+            .q-image {
+                img {
+                    width: 300px;
+                    height: 200px;
+                }
+
+            }
             .question {
                 font-size: 20px;
                 font-weight: 600;
             }
+
+            .answer {}
+
         }
+
         .footer {
             display: flex;
             justify-content: center;
-            gap :10px;
+            gap: 10px;
         }
     }
 
