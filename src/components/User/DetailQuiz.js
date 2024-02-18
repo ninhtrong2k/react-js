@@ -16,7 +16,6 @@ const DetailQuiz = (props) => {
     }, [quizId])
     const fetchQuestions = async () => {
         let res = await getDataQuiz(quizId);
-        console.log('check question ', res)
         if (res && res.EC === 0) {
             let raw = res.DT;
             let data = _.chain(raw)
@@ -35,16 +34,13 @@ const DetailQuiz = (props) => {
                         item.answers.isSelected = false;
                         answers.push(item.answers);
                     })
-                    console.log('value', value, 'key', key)
                     return { questionId: key, answers, questionDescription, image }
                 }
                 )
                 .value()
-            console.log(data)
             setDataQuiz(data);
         }
     }
-    console.log('check data quiz :', dataQuiz)
     const handlePrev = () => {
         if (index - 1 < 0) return;
         setIndex(index - 1)
@@ -57,8 +53,6 @@ const DetailQuiz = (props) => {
         let dataQuizClone = _.cloneDeep(dataQuiz);
         let question = dataQuizClone.find(item => +item.questionId === +questionId)
         if (question && question.answers) {
-            // console.log('q', question);
-            // props.handleCheckbox()
             let b = question.answers.map(item => {
                 if(+item.id === +answerId){
                     item.isSelected = !item.isSelected ;
@@ -71,6 +65,33 @@ const DetailQuiz = (props) => {
                 dataQuizClone[index] = question;
                 setDataQuiz(dataQuizClone);
             }
+        }
+    }
+    const handleFinishQuiz = () => {
+        console.log("check data befo",dataQuiz);
+        let payload = {
+            quizId:+quizId,
+            answers :[
+
+            ]
+        };
+        let answers = [];
+        if(dataQuiz && dataQuiz.length > 0){
+            dataQuiz.forEach(question =>{
+                let questionId = question.questionId;
+                let userAnswerId = [];
+                question.answers.forEach(a => {
+                    if(a.isSelected === true){
+                        userAnswerId.push(a.id);
+                    }
+                })
+                answers.push({
+                    questionId : +questionId,
+                    userAnswerId : userAnswerId
+                })
+            })
+            payload.answers = answers;
+            console.log('find',payload);
         }
     }
     return (
@@ -103,7 +124,7 @@ const DetailQuiz = (props) => {
                     </button>
                     <button
                         className="btn btn-warning"
-                        onClick={() => handleNext()}>
+                        onClick={() => handleFinishQuiz()}>
                         Finish
                     </button>
                 </div>
