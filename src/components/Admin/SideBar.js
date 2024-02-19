@@ -12,10 +12,11 @@ import {
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../assets/bg2.jpg';
 import { FaReact } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 
 
 const SideBar = (props) => {
+    const navigate = useNavigate();
     const { image, collapsed, toggled, handleToggleSidebar } = props;
     return (
         <>
@@ -40,7 +41,7 @@ const SideBar = (props) => {
                         }}
                     >
                         <FaReact fontSize={'3rem'} color={'blue'} />
-                        Hoi Dan IT
+                       <span onClick={()=> navigate('/')}>Hoi Dan IT</span> 
                     </div>
                 </SidebarHeader>
 
@@ -66,7 +67,9 @@ const SideBar = (props) => {
                             <Link to="/admins/manage-users" />
                              
                              </MenuItem>
-                            <MenuItem> Quản lý Bài Quiz</MenuItem>
+                            <MenuItem> Quản lý Bài Quiz
+                            <Link to="/admins/manage-quizzes" />
+                            </MenuItem>
                             <MenuItem> Quản lý Câu Hỏi</MenuItem>
                         </SubMenu>
 
