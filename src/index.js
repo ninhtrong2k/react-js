@@ -6,6 +6,8 @@ import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'nprogress/nprogress.css';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';  /// Điều hướng
 import Layout from './Layout';
