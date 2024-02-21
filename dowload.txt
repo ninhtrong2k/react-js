@@ -34,3 +34,6 @@ lưu người dùng khi f5
 npm install --save-exact redux-persist@6.0.0
 
 npm install --save-exact react-select@5.4.0
+
+
+npm install --save-exact react-perfect-scrollbar@1.5.8

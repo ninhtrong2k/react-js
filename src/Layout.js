@@ -12,6 +12,7 @@ import Register from "./components/Auth/Register";
 import ListQuiz from "./components/User/ListQuiz";
 import DetailQuiz from "./components/User/DetailQuiz";
 import ManageQuiz from "./components/User/Quiz/MangageQuiz";
+import Questions from "./components/Admin/Questions/Questions";
 
 const NotFound = () => {
     return (
@@ -32,6 +33,7 @@ const Layout = (props) => {
                 <Route path='admins' element={<Admin />}>
                     <Route path='manage-users' element={<ManageUser />}></Route>
                     <Route path='manage-quizzes' element={<ManageQuiz />}></Route>
+                    <Route path='manage-questions' element={<Questions />}></Route>
                     <Route index element={<DashBoard />}></Route>
                 </Route>
                 <Route path='/login' element={<Login />}></Route>
