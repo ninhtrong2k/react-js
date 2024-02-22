@@ -1,20 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import './Questions.scss';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { FaPlus, FaMinusCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from 'uuid';
-import _ from 'lodash';
+import _, { create } from 'lodash';
 import { type } from '@testing-library/user-event/dist/type';
 import Lightbox from "react-awesome-lightbox";
+import { getAllQuizForAdmin , postCreateNewQuestionForQuiz, postCreateAnswerNewForQuiz } from "../../../services/apiServices";
 
 
 const Questions = (props) => {
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-    ];
     const [selectedQuiz, setSelectedQuiz] = useState({});
     const [questions, setQuestion] = useState(
         [
@@ -38,6 +34,24 @@ const Questions = (props) => {
         title : '',
         url: ''
     })
+    const [listQuiz , setListQuiz] = useState([
+
+    ]);
+    useEffect(() => {
+        fetchQuiz();
+    }, [])
+    const fetchQuiz = async () => {
+        let res = await getAllQuizForAdmin();
+        if (res && res.EC === 0) {
+            let newQuiz = res.DT.map(item => {
+                return {
+                    value : item.id,
+                    label :`${item.id}-${item.description}`
+                }
+            })
+            setListQuiz(newQuiz);
+        }
+    }
     const handleAddRemoveQuestion = (type, id) => {
         if (type === 'ADD') {
             const newQuestion = {
@@ -87,7 +101,7 @@ const Questions = (props) => {
             setQuestion(questionsClone);
         }
     }
-    console.log('question', questions);
+    console.log('question', questions,selectedQuiz);
     const handleOnchange = (type, questionId, value) => {
         if (type === 'QUESTION') {
             let questionsClone = _.cloneDeep(questions);
@@ -125,8 +139,22 @@ const Questions = (props) => {
             setQuestion(questionsClone);
         }
     }
-    const handleSubmitQuestionForQuiz = () => {
+    const handleSubmitQuestionForQuiz = async() => {
         console.log(questions)
+        // postCreateNewQuestionForQuiz, postCreateAnswerNewForQuiz
+        await Promise.all(questions.map(async(question) => {
+            const q = await postCreateNewQuestionForQuiz(+selectedQuiz.value,question.description,question.imageFile);
+            await Promise.all(question.answers.map(async(answer) => {
+                let as = await postCreateAnswerNewForQuiz(
+                    answer.description,answer.isCorrect,q.DT.id
+                )
+                console.log('ans',as)
+            }))
+        }));
+
+        // submit question 
+
+        // submit answers
     }
     const handlePreviewImage = (questionId) => {
         let questionsClone = _.cloneDeep(questions);
@@ -145,12 +173,12 @@ const Questions = (props) => {
                 Manage Questions
             </div>
             <div className="add-new-question">
-                <div className='col-6 form-group'>
+                <div className='col-6 form-group' >
                     <label>Select Quiz</label>
                     <Select
                         defaultdefaultValue={selectedQuiz}
                         onChange={setSelectedQuiz}
-                        options={options}
+                        options={listQuiz}
                     // className='form-control'
                     />
                 </div>
