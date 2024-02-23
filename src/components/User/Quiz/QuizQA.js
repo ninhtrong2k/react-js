@@ -7,7 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 import _, { create } from 'lodash';
 import { type } from '@testing-library/user-event/dist/type';
 import Lightbox from "react-awesome-lightbox";
-import { getAllQuizForAdmin, postCreateNewQuestionForQuiz, postCreateAnswerNewForQuiz } from "../../../services/apiServices";
+import {
+    getAllQuizForAdmin,
+    postCreateNewQuestionForQuiz,
+    postCreateAnswerNewForQuiz,
+    getQuizWithQA
+} from "../../../services/apiServices";
 import { toast } from 'react-toastify';
 
 
@@ -37,6 +42,7 @@ const QuizQA = (props) => {
     const [listQuiz, setListQuiz] = useState([
 
     ]);
+    console.log("selctQuiz", selectedQuiz);
     useEffect(() => {
         fetchQuiz();
     }, [])
@@ -51,6 +57,36 @@ const QuizQA = (props) => {
             })
             setListQuiz(newQuiz);
         }
+    }
+    useEffect(() => {
+        if (selectedQuiz && selectedQuiz.value) {
+            fetQuizWithQA();
+        }
+    }, [selectedQuiz])
+
+    function urltoFile(url, filename, mimeType) {
+        return (fetch(url)
+            .then(function (res) { return res.arrayBuffer(); })
+            .then(function (buf) { return new File([buf], filename, { type: mimeType }); })
+        )
+    }
+    const fetQuizWithQA = async () => {
+        let res = await getQuizWithQA(selectedQuiz.value);
+        if (res && res.EC === 0) {
+            // convert base 64 to file oj
+            let newQA = [];
+            for (let i = 0; i < res.DT.qa.length; i++) {
+                let q = res.DT.qa[i]
+                if (q.imageFile) {
+                    q.imageName = `Question-${q.id}.png`;
+                    q.imageFile = await urltoFile(`data:image/png;base64,${q.imageFile}`, `Question-${q.id}.png`, 'image/png')
+                }
+                newQA.push(q);
+            }
+            setQuestion(newQA)
+            console.log(">>> check newQA", newQA);
+        }
+        console.log(">>> check rs", res);
     }
     const handleAddRemoveQuestion = (type, id) => {
         if (type === 'ADD') {
@@ -228,6 +264,10 @@ const QuizQA = (props) => {
                         defaultdefaultValue={selectedQuiz}
                         onChange={setSelectedQuiz}
                         options={listQuiz}
+                        styles={{
+                            // Fixes the overlapping problem of the component
+                            menu: provided => ({ ...provided, zIndex: 9999 })
+                        }}
                     // className='form-control'
                     />
                 </div>
