@@ -68,6 +68,12 @@
                     color: #fff;
                     background: #ccc;
                 }
+                &.selected {
+                    background: red;
+                }
+                &.clicked {
+                    background: gold;
+                }
             }
         }
     }
