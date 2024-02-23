@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import './Questions.scss';
+import './QuizQA.scss';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { FaPlus, FaMinusCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from 'uuid';
@@ -11,7 +11,7 @@ import { getAllQuizForAdmin, postCreateNewQuestionForQuiz, postCreateAnswerNewFo
 import { toast } from 'react-toastify';
 
 
-const Questions = (props) => {
+const QuizQA = (props) => {
     const initQuestions = [
         {
             id: uuidv4(),
@@ -27,13 +27,13 @@ const Questions = (props) => {
             ]
         }
     ]
-    const [selectedQuiz, setSelectedQuiz] = useState({});
     const [questions, setQuestion] = useState(initQuestions)
     const [isPreviewImage, setIsPreviewImage] = useState(false)
     const [dataImagePreview, setDataImagePreview] = useState({
         title: '',
         url: ''
     })
+    const [selectedQuiz, setSelectedQuiz] = useState({});
     const [listQuiz, setListQuiz] = useState([
 
     ]);
@@ -334,4 +334,4 @@ const Questions = (props) => {
 }
 
 
-export default Questions;
+export default QuizQA;
