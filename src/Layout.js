@@ -13,11 +13,14 @@ import ListQuiz from "./components/User/ListQuiz";
 import DetailQuiz from "./components/User/DetailQuiz";
 import ManageQuiz from "./components/User/Quiz/MangageQuiz";
 import Questions from "./components/Admin/Questions/Questions";
+import Test2 from "./components/routes/Test2";
+import Test1 from "./components/routes/Test1";
+import PrivateRoute from "./components/routes/PrivateRoute";
 
 const NotFound = () => {
     return (
         <div className="container mt-3 alert alert-danger">
-           404. Not found data with  your current URL
+            404. Not found data with  your current URL
         </div>
     )
 }
@@ -27,10 +30,18 @@ const Layout = (props) => {
             <Routes>
                 <Route path='' element={<App />}>
                     <Route index element={<HomePage />}></Route>
-                    <Route path='users' element={<ListQuiz />}></Route>
+                    <Route path='users' element={
+                        <PrivateRoute>
+                            <ListQuiz />
+                        </PrivateRoute>
+                    }></Route>
                 </Route>
                 <Route path='/quiz/:id' element={<DetailQuiz />}></Route>
-                <Route path='admins' element={<Admin />}>
+                <Route path='admins' element={
+                    <PrivateRoute>
+                        <Admin />
+                    </PrivateRoute>
+                }>
                     <Route path='manage-users' element={<ManageUser />}></Route>
                     <Route path='manage-quizzes' element={<ManageQuiz />}></Route>
                     <Route path='manage-questions' element={<Questions />}></Route>
@@ -38,7 +49,8 @@ const Layout = (props) => {
                 </Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/reg' element={<Register />}></Route>
-                <Route path="*" element={<NotFound/>}/>
+                <Route path='/test' element={<PrivateRoute />}></Route>
+                <Route path="*" element={<NotFound />} />
             </Routes>
             <ToastContainer
                 position="top-right"
