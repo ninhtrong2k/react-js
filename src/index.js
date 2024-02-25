@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'nprogress/nprogress.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import "react-awesome-lightbox/build/style.css";
-
+import i18n from './utils/i18n';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';  /// Điều hướng
 import Layout from './Layout';

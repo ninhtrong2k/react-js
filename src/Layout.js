@@ -16,6 +16,7 @@ import Questions from "./components/Admin/Questions/Questions";
 import Test2 from "./components/routes/Test2";
 import Test1 from "./components/routes/Test1";
 import PrivateRoute from "./components/routes/PrivateRoute";
+import {Suspense} from "react";
 
 const NotFound = () => {
     return (
@@ -26,7 +27,7 @@ const NotFound = () => {
 }
 const Layout = (props) => {
     return (
-        <>
+        <Suspense fallback={<div>Loaing</div>}>
             <Routes>
                 <Route path='' element={<App />}>
                     <Route index element={<HomePage />}></Route>
@@ -63,7 +64,7 @@ const Layout = (props) => {
                 draggable
                 pauseOnHover
             />
-        </>
+        </Suspense>
     )
 }
 export default Layout;
