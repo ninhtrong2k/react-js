@@ -23,7 +23,14 @@ const Login = (props) => {
         };
         if (data && data.EC !== 0) {
             toast.error(data.EM)
+            console.log(data.EM);
             setIsLoading(false);
+        }
+    }
+    const handleKeyDown = (event) => {
+        console.log(event.key)
+        if(event && event.key === 'Enter'){
+            handleLogin();
         }
     }
     return (
@@ -57,6 +64,7 @@ const Login = (props) => {
                         className='form-control'
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
+                        onKeyDown={(event) => handleKeyDown(event)}
                     ></input>
                 </div>
                 <span className='forgot-password'>Forgot password ?</span>

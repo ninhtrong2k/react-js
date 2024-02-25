@@ -42,7 +42,7 @@ const postLogin = (email, password) => {
     return axios.post(`api/v1/login`, {
         email,
         password,
-        delay: 5000
+        delay: "1000"
     });
 }
 const getQuizByUeser = () => {
@@ -96,6 +96,11 @@ const postUpsertQA = (data) => {
     return axios.post(`api/v1/quiz-upsert-qa`,{...data});
 
 }
+const logout = (email,refresh_token) => {
+    return axios.post('api/v1/logout', {
+        email,refresh_token
+    });
+}
 export {
     postCreateNewUser,
     getAllUsers,
@@ -113,7 +118,8 @@ export {
     postCreateAnswerNewForQuiz,
     postAssignQuiz,
     getQuizWithQA,
-    postUpsertQA
+    postUpsertQA,
+    logout
 
 }
 
